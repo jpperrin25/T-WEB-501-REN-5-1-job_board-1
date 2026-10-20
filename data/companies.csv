@@ -1,0 +1,26 @@
+id_company;name;SIRET;description
+1;NovaTech Solutions;73214589013791;Éditeur de logiciels et intégrateur de solutions numériques pour les PME et ETI. L’entreprise développe des applications métiers, accompagne la transformation digitale et propose des services de cybersécurité, cloud et support informatique.
+2;Armor Conseil;51938427627582;Cabinet de conseil indépendant spécialisé dans la stratégie, l’organisation, la finance et la transformation des entreprises. Les équipes interviennent auprès de PME, ETI et acteurs publics dans l’Ouest de la France.
+3;Bretagne Logistique;68125793441373;Entreprise régionale de transport et de logistique spécialisée dans l’entreposage, la préparation de commandes et la distribution. Elle exploite plusieurs plateformes dans le Grand Ouest.
+4;GreenWave Énergies;80432651755164;Acteur des énergies renouvelables qui développe et exploite des projets solaires, éoliens et de performance énergétique. L’entreprise accompagne également les collectivités et entreprises dans leur transition.
+5;Atelier Ker;44782163568955;Groupe spécialisé dans l’aménagement intérieur, la fabrication de mobilier professionnel et la décoration d’espaces. Ses équipes travaillent avec des entreprises, hôtels, restaurants et particuliers.
+6;Océane Santé;39167425882746;Entreprise de services dédiée aux établissements de santé et aux professionnels médicaux. Elle développe des solutions administratives, logistiques et numériques pour améliorer le fonctionnement des structures de soins.
+7;West Digital Factory;61573948296537;Studio numérique réalisant des sites web, applications mobiles, plateformes e-commerce et outils internes. Les projets réunissent développeurs, designers, chefs de projet et experts marketing.
+8;Rennes Habitat;52941876310328;Entreprise spécialisée dans la gestion, la rénovation et la commercialisation de logements et de bâtiments tertiaires en Bretagne. Elle intervient sur des projets immobiliers durables.
+9;Mosaïque Communication;78320541624119;Agence de communication globale accompagnant des marques et institutions sur leur stratégie, leur identité visuelle, leurs campagnes digitales et leurs événements.
+10;TerraFood Distribution;45281763937910;Distributeur régional de produits alimentaires auprès des restaurants, commerces et collectivités. L’entreprise combine logistique, achats, qualité et commerce de proximité.
+11;Finistère Marine;63829475151701;Entreprise industrielle spécialisée dans la construction, la maintenance et l’équipement de bateaux professionnels et de plaisance.
+12;Breizh Mobility;71452698365492;Opérateur de mobilité proposant des solutions de transport partagé, de location et de gestion de flottes pour les entreprises et collectivités.
+13;Lumière Hôtels;38691724579283;Groupe hôtelier indépendant présent dans plusieurs villes françaises. Les équipes travaillent sur l’hébergement, la restauration, l’expérience client et le développement commercial.
+14;DataArmor;59274183693074;Société spécialisée en data, business intelligence et automatisation. Elle accompagne les organisations dans la structuration de leurs données et la mise en place d’outils de pilotage.
+15;Solstice Retail;82146357906865;Enseigne spécialisée dans l’équipement de la maison et les produits du quotidien. Elle développe son réseau de magasins et son activité e-commerce.
+16;Cap Ouest Recrutement;46381925720656;Cabinet de recrutement régional spécialisé dans les fonctions cadres, commerciales, techniques et support. Il accompagne entreprises et candidats sur des recrutements durables.
+17;BatiNova Groupe;73825196434447;Entreprise du bâtiment intervenant sur la construction, la rénovation énergétique et la maintenance des bâtiments professionnels et résidentiels.
+18;Studio Pixel & Co;51692743848238;Studio créatif réunissant graphistes, vidéastes, développeurs et spécialistes du contenu pour produire des campagnes et expériences digitales.
+19;AgriTerroirs;67431582962029;Entreprise agroalimentaire valorisant les productions régionales et fournissant des produits frais et transformés aux réseaux de distribution et de restauration.
+20;EkoCycle;90524176375820;Entreprise spécialisée dans le réemploi, la collecte et le recyclage des équipements professionnels. Elle développe des solutions d’économie circulaire pour les entreprises.
+21;Réseau Santé Plus;35861492789611;Réseau de services et de coordination pour les professionnels de santé, avec des activités administratives, relationnelles et numériques.
+22;Atlantic Cyber;74619358203402;Entreprise de cybersécurité proposant audit, supervision, conseil et accompagnement des organisations dans la protection de leurs systèmes d’information.
+23;Maison Botanique;48273561917193;Marque française de produits de bien-être, cosmétiques et parfumerie naturelle. Elle développe ses ventes en boutiques et en ligne.
+24;Nexa Industrie;61742895330984;PME industrielle spécialisée dans les équipements automatisés, la maintenance et l’amélioration des lignes de production.
+25;Urbania Services;53986172444775;Entreprise multiservices intervenant auprès des entreprises et collectivités dans la maintenance, l’accueil, la propreté et la gestion des sites.

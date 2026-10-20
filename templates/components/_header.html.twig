@@ -1,0 +1,22 @@
+<header class="site-header">
+    <div class="container header-content">
+        <a href="{{ path('app_job_index') }}" class="logo" aria-label="JobBoard - Accueil">
+            JobBoard
+        </a>
+
+        <nav class="header-navigation" aria-label="Navigation principale">
+            <a href="{{ path('app_job_index') }}">Offres</a>
+            <a href="{{ path('app_company_index') }}">Entreprises</a>
+            <a href="{{ path('app_about') }}">À propos</a>
+        </nav>
+
+        <div class="header-menu">
+            {% if app.user %}
+                <span class="user-name">Bonjour {{ app.user.firstname }}</span>
+                {% include 'components/_burger_user.html.twig' %}
+            {% else %}
+                {% include 'components/_burger_guest.html.twig' %}
+            {% endif %}
+        </div>
+    </div>
+</header>

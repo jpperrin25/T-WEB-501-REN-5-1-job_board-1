@@ -1,0 +1,11 @@
+{{ form_start(form) }}
+    <div style="display: flex; flex-direction: column; gap: 16px;">
+        {{ form_widget(form) }}
+    </div>
+
+    <div style="margin-top: 24px; margin-bottom: 15px;">
+        <button class="update-href">
+            {{ button_label|default('Enregistrer l\'offre') }}
+        </button>
+    </div>
+{{ form_end(form) }}

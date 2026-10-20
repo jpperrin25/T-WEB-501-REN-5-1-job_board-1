@@ -1,0 +1,122 @@
+{% extends 'base.html.twig' %}
+
+{% set dashboard_role = 'admin' %}
+
+{% block title %}Gestion des utilisateurs — JobBoard{% endblock %}
+
+{% block body %}
+<div class="dashboard-layout">
+    {% include 'components/_dashboard_sidebar.html.twig' %}
+
+    <main class="dashboard-main">
+        <header class="dashboard-page-heading">
+            <p class="dashboard-sidebar-label">ADMINISTRATION</p>
+            <h1>Gestion des utilisateurs</h1>
+            <p>Consultez les comptes inscrits sur JobBoard et gérez leurs informations.</p>
+        </header>
+
+        <section class="dashboard-stats" aria-label="Résumé des utilisateurs">
+            <article class="dashboard-card">
+                <span class="dashboard-card-icon">♙</span>
+                <h2>Utilisateurs inscrits</h2>
+                <p class="dashboard-card-value">{{ users|length }}</p>
+                <span class="dashboard-card-note">Comptes présents sur la plateforme</span>
+            </article>
+        </section>
+
+        {% if users is empty %}
+            <section class="dashboard-panel">
+                <h2>Aucun utilisateur</h2>
+                <p class="dashboard-empty">
+                    Aucun compte utilisateur n'est actuellement enregistré.
+                </p>
+            </section>
+        {% else %}
+            <section class="dashboard-section">
+                <div class="dashboard-section-heading">
+                    <div>
+                        <h2>Liste des comptes</h2>
+                        <p>Informations des utilisateurs et actions d'administration.</p>
+                    </div>
+                </div>
+
+                <div style="display: grid; gap: 20px;">
+                    {% for user in users %}
+                        <article class="dashboard-panel">
+                            <div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 20px;">
+                                <div style="min-width: 220px; flex: 1;">
+                                    <p class="eyebrow">UTILISATEUR #{{ user.id }}</p>
+                                    <h2 style="color: var(--navy); margin: 0 0 8px;">
+                                        {{ user.firstname }} {{ user.lastname }}
+                                    </h2>
+                                    <p style="color: var(--muted); margin: 0 0 6px;">
+                                        {{ user.email }}
+                                    </p>
+
+                                    {% if user.phone %}
+                                        <p style="color: var(--muted); margin: 0 0 6px;">
+                                            Téléphone : {{ user.phone }}
+                                        </p>
+                                    {% endif %}
+
+                                    <p style="color: var(--muted); margin: 0 0 6px;">
+                                        Ville : {{ user.city ?: 'Non renseignée' }}
+                                    </p>
+
+                                    {% if user.postalCode %}
+                                        <p style="color: var(--muted); margin: 0 0 6px;">
+                                            Code postal : {{ user.postalCode }}
+                                        </p>
+                                    {% endif %}
+
+                                    {% if user.graduate %}
+                                        <p style="color: var(--muted); margin: 0 0 6px;">
+                                            Formation : {{ user.graduate }}
+                                        </p>
+                                    {% endif %}
+
+                                    <p style="margin: 12px 0 0;">
+                                        <span class="dashboard-card-note">
+                                            Rôles : {{ user.roles|join(', ') }}
+                                        </span>
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div style="display: flex; justify-content: flex-end; flex-wrap: wrap; gap: 10px; margin-top: 24px; padding-top: 18px; border-top: 1px solid var(--border);">
+                                <a
+                                    href="{{ path('app_user_edit', {'id': user.id}) }}"
+                                    class="dashboard-primary-button"
+                                >
+                                    Modifier
+                                </a>
+
+                                {% if app.user and app.user.id != user.id %}
+                                    <form
+                                        method="post"
+                                        action="{{ path('app_user_delete', {'id': user.id}) }}"
+                                        onsubmit="return confirm('Confirmer la suppression de cet utilisateur ?');"
+                                    >
+                                        <input
+                                            type="hidden"
+                                            name="_token"
+                                            value="{{ csrf_token('delete' ~ user.id) }}"
+                                        >
+                                        <button
+                                            type="submit"
+                                            class="dashboard-primary-button"
+                                            style="background: var(--navy); border-color: var(--navy);"
+                                        >
+                                            Supprimer
+                                        </button>
+                                    </form>
+                                {% endif %}
+                            </div>
+                        </article>
+                    {% endfor %}
+                </div>
+            </section>
+        {% endif %}
+    </main>
+</div>
+{% endblock %}

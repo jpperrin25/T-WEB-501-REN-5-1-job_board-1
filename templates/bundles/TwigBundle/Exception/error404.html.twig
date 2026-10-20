@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Page introuvable (404) | JobBoard{% endblock %}
+
+{% block body %}
+<div class="error-page-container profile-edit-page">
+    <div class="profile-edit-card error-card">
+        
+        <div class="error-icon-box error-icon-warning">
+            🔍
+        </div>
+
+        <div class="profile-edit-heading" style="margin-bottom: 24px;">
+            <span class="profile-edit-eyebrow">ERREUR 404</span>
+            <h1 style="margin-bottom: 12px;">Page introuvable</h1>
+            <p style="max-width: 480px; margin: 0 auto; color: var(--muted); font-size: 0.98rem; line-height: 1.6;">
+                La page que vous cherchez n'existe pas ou a été déplacée.
+            </p>
+        </div>
+
+        <div class="error-actions-wrapper">
+            <a href="{{ path('app_job_index') }}" class="applications-back">
+                🏠 Retour aux offres
+            </a>
+        </div>
+
+    </div>
+</div>
+{% endblock %}

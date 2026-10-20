@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        {% block title %}JobBoard{% endblock %}
+    </title>
+
+    <link rel="stylesheet" href="/css/app.css">
+
+    {% block stylesheets %}
+    {% endblock %}
+
+</head>
+
+<body>
+
+    {% include 'components/_header.html.twig' %}
+    {% include "components/_flashes.html.twig" %}
+    <main class="main-content">
+
+        {% block body %}
+        {% endblock %}
+
+    </main>
+
+    {% include 'components/_footer.html.twig' %}
+
+    <script src="/js/auth.js?v=20261016-company-modal"></script>
+
+    {% block javascripts %}
+    {% endblock %}
+
+</body>
+
+</html>

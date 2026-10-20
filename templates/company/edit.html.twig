@@ -1,0 +1,84 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier l'entreprise | JobBoard{% endblock %}
+
+{% block body %}
+    <div class="profile-edit-page">
+
+        {# Lien de retour #}
+        <a href="{{ path('app_user_dashboard') }}" class="profile-edit-back">
+            ← Retour à la liste
+        </a>
+
+        {# En-tête de la page avec aération #}
+        <div class="profile-edit-heading">
+            <span class="profile-edit-eyebrow">ESPACE ENTREPRISE</span>
+            <h1>Modifier l'entreprise</h1>
+            <p>Retrouvez et mettez à jour les informations de l'entreprise et de son responsable.</p>
+        </div>
+
+        {# Carte principale du profil #}
+        <div class="profile-edit-card">
+
+            {# En-tête de la carte avec l'icône et le nom #}
+            <div class="profile-edit-card-heading">
+                <div class="profile-edit-icon">
+                    👤
+                </div>
+                <div>
+                    <h2>{{ user.firstname }} {{ user.lastname }}</h2>
+                    <p>{{ user.email }}</p>
+                </div>
+            </div>
+
+            {# Grille de mini-cartes pour chaque champ du user #}
+            <div class="public-modal-facts" style="margin-bottom: 32px;">
+                <div>
+                    <span>Prénom</span>
+                    <strong>{{ user.firstname ?: 'Non renseigné' }}</strong>
+                </div>
+
+                <div>
+                    <span>Nom</span>
+                    <strong>{{ user.lastname ?: 'Non renseigné' }}</strong>
+                </div>
+
+                <div>
+                    <span>Adresse e-mail</span>
+                    <strong>{{ user.email ?: 'Non renseignée' }}</strong>
+                </div>
+
+                <div>
+                    <span>Téléphone</span>
+                    <strong>{{ user.phone ?: 'Non renseigné' }}</strong>
+                </div>
+
+                <div>
+                    <span>Ville</span>
+                    <strong>{{ user.city ?: 'Non renseignée' }}</strong>
+                </div>
+
+                <div>
+                    <span>Code postal</span>
+                    <strong>{{ user.postalCode ?: 'Non renseigné' }}</strong>
+                </div>
+
+                {# Le diplôme s'étale sur toute la largeur de la grille #}
+                <div style="grid-column: 1 / -1;">
+                    <span>Diplôme / Formation</span>
+                    <strong>{{ user.graduate ?: 'Non renseigné' }}</strong>
+                </div>
+                <div style="grid-column: 1 / -1; margin-top: 10px; margin-bottom: 25px; min-width: 20vw;">
+                    <a href="{{ path('app_user_edit', {id: user.id}) }}" class="applications-back" style="width: 100%; display: inline-flex; justify-content: center;">
+                        ✏️ Modifier le profil utilisateur
+                    </a>            </div>
+
+                {{ include('company/_form.html.twig', {'button_label': 'Mettre à jour'}) }}
+
+                {{ include('company/_delete_form.html.twig') }}
+
+
+            </div>
+
+        </div>
+{% endblock %}

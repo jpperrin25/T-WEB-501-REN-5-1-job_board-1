@@ -1,0 +1,67 @@
+{% extends 'base.html.twig' %}
+
+{% set dashboard_role = 'company' %}
+
+{% block title %}Espace entreprise | JobBoard{% endblock %}
+
+{% block body %}
+<div class="dashboard-layout company-dashboard">
+    {% include 'components/_dashboard_sidebar.html.twig' %}
+
+    <main class="dashboard-main">
+        <header class="dashboard-page-heading">
+            <p class="dashboard-sidebar-label">ESPACE ENTREPRISE</p>
+            <h1>Bienvenue sur votre espace</h1>
+            <p>Retrouvez ici les outils pour gérer vos offres et vos recrutements.</p>
+        </header>
+
+        <section class="dashboard-welcome-card">
+            <div>
+                <span class="dashboard-eyebrow">VOTRE ESPACE RECRUTEUR</span>
+                <h2>Recrutez les bons talents.</h2>
+                <p>Publiez vos opportunités et retrouvez les candidatures depuis JobBoard.</p>
+                <a href="{{ path('app_job_new') }}" class="dashboard-primary-button">
+                    + Créer une offre
+                </a>
+            </div>
+        </section>
+
+        <section class="dashboard-section">
+            <div class="dashboard-section-heading">
+                <div>
+                    <h2>Gestion du recrutement</h2>
+                    <p>Accédez directement à vos principaux outils.</p>
+                </div>
+            </div>
+
+            <div class="dashboard-action-grid">
+                <a href="{{ path('app_job_index') }}" class="dashboard-action-card">
+                    <span class="dashboard-action-icon">▤</span>
+                    <h3>Offres d'emploi</h3>
+                    <p>Consultez les offres disponibles.</p>
+                    <span class="dashboard-action-link">Voir les offres →</span>
+                </a>
+
+                <a href="{{ path('app_user_applications') }}" class="dashboard-action-card">
+                    <span class="dashboard-action-icon">♧</span>
+                    <h3>Candidatures</h3>
+                    <p>Accédez à la liste des candidatures reçues par votre entreprise.</p>
+                    <span class="dashboard-action-link">Voir les candidatures →</span>
+                </a>
+
+                <a href="{{ path('app_company_index') }}" class="dashboard-action-card">
+                    <span class="dashboard-action-icon">▦</span>
+                    <h3>Entreprises</h3>
+                    <p>Consultez les pages des entreprises.</p>
+                    <span class="dashboard-action-link">Voir les entreprises →</span>
+                </a>
+            </div>
+        </section>
+
+        <section class="dashboard-note">
+            <span aria-hidden="true">ⓘ</span>
+            <p>Les statistiques de recrutement et les données propres à votre entreprise seront affichées lorsque leur récupération sera raccordée au backend.</p>
+        </section>
+    </main>
+</div>
+{% endblock %}

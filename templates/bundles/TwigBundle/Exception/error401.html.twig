@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Connexion requise (401) | JobBoard{% endblock %}
+
+{% block body %}
+<div class="profile-edit-page">
+    <div class="profile-edit-card">
+        
+        {# En-tête avec l'icône #}
+        <div class="profile-edit-card-heading">
+            <div class="profile-edit-icon">
+                🔑
+            </div>
+            <div>
+                <h2>Connexion requise</h2>
+                <p>Erreur 401</p>
+            </div>
+        </div>
+
+        {# Message d'information #}
+        <div class="dashboard-note" style="margin-bottom: 32px;">
+            <span aria-hidden="true">ⓘ</span>
+            <p>
+                Vous devez être connecté à votre compte pour accéder à cette page ou effectuer cette action.
+            </p>
+        </div>
+
+        {# Boutons côte à côte en space-between propres #}
+        <div style="display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; padding-top: 24px; border-top: 1px solid var(--border);">
+            <a href="{{ path('secu.login') }}" class="applications-back" style="flex: 1; min-width: 180px; text-align: center; justify-content: center; background-color: var(--navy); color: #fff; border-color: var(--navy);">
+                👤 Se connecter
+            </a>
+            
+            <a href="{{ path('secu.register') }}" class="applications-back" style="flex: 1; min-width: 180px; text-align: center; justify-content: center;">
+                ✨ Créer un compte
+            </a>
+        </div>
+
+    </div>
+</div>
+{% endblock %}

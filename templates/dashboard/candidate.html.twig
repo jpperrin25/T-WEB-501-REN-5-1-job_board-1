@@ -1,0 +1,81 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mon tableau de bord — JobBoard{% endblock %}
+
+{% block body %}
+    <div class="dashboard-layout">
+        {% include 'components/_dashboard_sidebar.html.twig' %}
+
+        <main class="dashboard-main candidate-dashboard">
+                <span class="eyebrow">ESPACE CANDIDAT</span>
+                <h1>Bonjour {{ app.user.firstname|default('') }} 👋</h1>
+                <p>Retrouvez vos démarches et poursuivez votre recherche d'emploi.</p>
+            </header>
+
+            <section class="dashboard-stats" aria-label="Résumé de votre espace candidat">
+                <article class="dashboard-card">
+                    <span class="dashboard-card-icon" aria-hidden="true">▤</span>
+                    <h2>Mes candidatures</h2>
+                    <p class="dashboard-card-value">—</p>
+                    <span class="dashboard-card-note">Suivi de vos démarches</span>
+                </article>
+
+                {# <article
+                    class="dashboard-card dashboard-card-disabled"
+                    aria-disabled="true"
+                >
+                    <span class="dashboard-card-icon" aria-hidden="true">▧</span>
+                    <h2>Mes documents</h2>
+                    <p class="dashboard-card-value">—</p>
+                    <span class="dashboard-card-note">Disponible en V3</span>
+                </article> #}
+            </section>
+
+            <section class="dashboard-panel">
+                <div class="dashboard-section-heading">
+                    <div>
+                        <span class="eyebrow">VOTRE PARCOURS</span>
+                        <h2>Reprendre ma recherche</h2>
+                    </div>
+                </div>
+
+                <p class="dashboard-empty">
+                    Explorez les offres disponibles et trouvez votre prochaine opportunité.
+                </p>
+
+                <a class="dashboard-primary-button" href="{{ path('app_job_index') }}">
+                    Découvrir les offres d'emploi <span aria-hidden="true">→</span>
+                </a>
+            </section>
+
+            <section class="dashboard-shortcuts" aria-label="Accès rapides">
+                <a class="dashboard-shortcut" href="{{ path('app_user_edit', {id: app.user.id}) }}">
+                    <span class="dashboard-shortcut-icon" aria-hidden="true">♙</span>
+                    <span>
+                        <strong>Modifier mon profil</strong>
+                        <small>Mettre à jour vos informations personnelles</small>
+                    </span>
+                    <span aria-hidden="true">→</span>
+                </a>
+
+                <a class="dashboard-shortcut" href="{{ path('app_company_index') }}">
+                    <span class="dashboard-shortcut-icon" aria-hidden="true">▦</span>
+                    <span>
+                        <strong>Découvrir les entreprises</strong>
+                        <small>Consulter les entreprises référencées</small>
+                    </span>
+                    <span aria-hidden="true">→</span>
+                </a>
+
+                <div class="dashboard-shortcut dashboard-shortcut-disabled" aria-disabled="true">
+                    <span class="dashboard-shortcut-icon" aria-hidden="true">☏</span>
+                    <span>
+                        <strong>Messagerie</strong>
+                        <small>Fonctionnalité prévue en V3</small>
+                    </span>
+                    <span class="dashboard-coming-soon">V3</span>
+                </div>
+            </section>
+        </main>
+    </div>
+{% endblock %}

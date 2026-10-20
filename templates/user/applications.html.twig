@@ -1,0 +1,90 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mes candidatures — JobBoard{% endblock %}
+
+{% block body %}
+<section class="container applications-page">
+    <header class="applications-header">
+        <div>
+            <p class="applications-eyebrow">ESPACE CANDIDAT</p>
+            <h1>Mes candidatures</h1>
+            <p class="applications-intro">
+                Retrouvez les offres auxquelles vous avez postulé et suivez vos démarches.
+            </p>
+        </div>
+
+        <a href="{{ path('app_job_index') }}" class="applications-back">
+            Découvrir les offres
+        </a>
+    </header>
+
+    {% set totalApplications = applications|length %}
+
+    <div class="applications-summary">
+        <span class="applications-summary-label">Candidatures envoyées</span>
+        <strong>{{ totalApplications }}</strong>
+    </div>
+
+    {% if applications is not empty %}
+        <div class="applications-list">
+            {% for application in applications %}
+                <article class="application-card">
+                    <div class="application-card-main">
+                        <div class="application-icon" aria-hidden="true">↗</div>
+
+                        <div class="application-details">
+                            <h2>
+                                {% if application.job %}
+                                    {{ application.job.title }}
+                                {% else %}
+                                    Offre indisponible
+                                {% endif %}
+                            </h2>
+
+                            <p class="application-company">
+                                {% if application.company %}
+                                    {{ application.company.name }}
+                                {% elseif application.job and application.job.company %}
+                                    {{ application.job.company.name }}
+                                {% else %}
+                                    Entreprise non renseignée
+                                {% endif %}
+                            </p>
+
+                            <p class="application-date">
+                                Envoyée le
+                                {% if application.createdAt %}
+                                    {{ application.createdAt|date('d/m/Y') }}
+                                {% else %}
+                                    date non renseignée
+                                {% endif %}
+                            </p>
+                        </div>
+                    </div>
+
+                    {% if application.job %}
+                        <a
+                            href="{{ path('app_job_show', {'id': application.job.id}) }}"
+                            class="application-view-link"
+                        >
+                            Voir l'offre
+                            <span aria-hidden="true">→</span>
+                        </a>
+                    {% endif %}
+                </article>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="applications-empty">
+            <div class="applications-empty-icon" aria-hidden="true">↗</div>
+            <h2>Pas encore de candidature</h2>
+            <p>
+                Les offres qui vous intéressent ? Consultez-les et envoyez votre première candidature.
+            </p>
+            <a href="{{ path('app_job_index') }}" class="applications-back">
+                Parcourir les offres
+            </a>
+        </div>
+    {% endif %}
+</section>
+{% endblock %}

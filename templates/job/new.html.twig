@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% set dashboard_role = 'company' %}
+
+{% block title %}Créer une offre | JobBoard{% endblock %}
+
+{% block body %}
+<div class="dashboard-layout company-dashboard">
+    {% include 'components/_dashboard_sidebar.html.twig' %}
+
+    <main class="dashboard-main">
+        <header class="dashboard-page-heading">
+            <p class="dashboard-sidebar-label">ESPACE ENTREPRISE</p>
+            <h1>Créer une nouvelle offre</h1>
+            <p>Remplissez les informations ci-dessous pour publier votre opportunité.</p>
+        </header>
+
+        <section class="dashboard-welcome-card" style="display: block;">
+        {{ include('user/_form.html.twig', {
+            'button_label': 'Enregistrer l\'offre',
+            'form_class': 'profile-edit-form'
+        }) }}
+        </section>
+    </main>
+</div>
+{% endblock %}

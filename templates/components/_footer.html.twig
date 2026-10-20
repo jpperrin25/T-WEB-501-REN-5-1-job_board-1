@@ -1,0 +1,28 @@
+<footer class="site-footer">
+    <div class="container footer-content">
+
+        <div>
+            <h2>JobBoard</h2>
+            <p>Votre prochaine opportunité professionnelle.</p>
+        </div>
+
+        <div>
+            <h3>Navigation</h3>
+
+            <a href="{{ path('secu.login') }}">
+                Connexion
+            </a>
+
+            <a href="{{ path('secu.register') }}">
+                Inscription
+            </a>
+        </div>
+
+    </div>
+
+    <div class="footer-bottom">
+        <p>
+            &copy; {{ "now"|date("Y") }} JobBoard
+        </p>
+    </div>
+</footer>

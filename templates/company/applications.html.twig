@@ -1,0 +1,127 @@
+{% extends 'base.html.twig' %}
+
+{% set dashboard_role = 'company' %}
+
+{% block title %}Mes candidatures — JobBoard{% endblock %}
+
+{% block body %}
+    <section class="container" style="padding-top: 40px; padding-bottom: 60px;">
+        <header style="margin-bottom: 32px;">
+            <p class="eyebrow">ESPACE RECRUTEUR</p>
+            <h1 style="color: var(--navy); margin-bottom: 10px;">Mes candidatures</h1>
+            <p style="color: var(--muted);">
+                Retrouvez les candidats qui ont postulé à vos offres d'emploi.
+            </p>
+        </header>
+
+        {% set totalApplications = 0 %}
+        {% for job in jobs %}
+            {% set totalApplications = totalApplications + job.applications|length %}
+        {% endfor %}
+
+        <section class="dashboard-stats" style="margin-bottom: 32px;">
+            <article class="dashboard-card">
+                <span class="dashboard-card-icon">▤</span>
+                <h2>Mes offres</h2>
+                <p class="dashboard-card-value">{{ jobs|length }}</p>
+                <span class="dashboard-card-note">Offres associées à votre entreprise</span>
+            </article>
+
+            <article class="dashboard-card">
+                <span class="dashboard-card-icon">♧</span>
+                <h2>Candidatures reçues</h2>
+                <p class="dashboard-card-value">{{ totalApplications }}</p>
+                <span class="dashboard-card-note">Total des candidatures enregistrées</span>
+            </article>
+        </section>
+
+        {% if jobs is empty %}
+            <div class="dashboard-panel">
+                <h2>Aucune offre pour le moment</h2>
+                <p>Publiez une offre pour commencer à recevoir des candidatures.</p>
+                <a href="{{ path('app_job_new') }}" class="dashboard-primary-button">
+                    Créer une offre
+                </a>
+            </div>
+        {% else %}
+            <div style="display: grid; gap: 24px;">
+                {% for job in jobs %}
+                    <article class="dashboard-panel">
+                        <header style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 20px;">
+                            <div>
+                                <p class="eyebrow">OFFRE D'EMPLOI</p>
+                                <h2 class="job-card-title">
+                                    <a href="{{ path('app_job_show', {id:job.id}) }}">         
+                                        {{ job.title }}
+                                    </a>
+                                </h2>
+                                <p style="color: var(--muted); margin: 0;">
+                                    {{ job.city }}{% if job.type %} · {{ job.type }}{% endif %}
+                                </p>
+                            </div>
+                            <span class="dashboard-card-note">
+                                {{ job.applications|length }}
+                                candidature{% if job.applications|length > 1 %}s{% endif %}
+                            </span>
+                        </header>
+
+                        {% if job.applications is empty %}
+                            <p class="dashboard-empty">
+                                Aucune candidature reçue pour cette offre.
+                            </p>
+                        {% else %}
+                            <div style="display: grid; gap: 12px;">
+                                {% for application in job.applications %}
+                                    <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 16px; padding: 16px; border: 1px solid var(--border); border-radius: 10px;">
+                                        <div>
+                                            <h3 style="color: var(--navy); margin: 0 0 6px;">
+                                                {{ application.user.firstname }}
+                                                {{ application.user.lastname }}
+                                            </h3>
+                                            <p style="color: var(--muted); margin: 0;">
+                                                {{ application.user.email }}
+                                            </p>
+                                            {% if application.createdAt %}
+                                                <small style="color: var(--muted);">
+                                                    Candidature du {{ application.createdAt|date('d/m/Y') }}
+                                                </small>
+                                            {% endif %}
+                                        </div>
+                                        <span style="font-size: 0.85rem; color: var(--muted);">
+                                            Candidature reçue
+                                        </span>
+
+
+                                        {# Boutons que j'ai ajouté pour tester! -------------------------------------------------------------------------------------- #}
+                                        <div class="actions-container">
+                                            <form
+                                                action="{{ path('app_company_show_candidate', {id: application.user.id}) }}"
+                                                method="get"
+                                            >
+                                                <input type="hidden" name="application" value="{{ application.id }}">
+                                                <button type="submit" class="btn btn-primary">Voir</button>
+                                            </form>
+        
+                                            <form action="{{ path('app_company_delete_application', { id: application.id }) }}" method="post">
+                                                <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ application.id) }}">
+                                                <button type="submit" class="btn btn-danger" onsubmit="Êtes-vous sûr de vouloir supprimer cette candidature ?">Supprimer</button>
+                                            </form>
+                                        </div>
+                                        {# Boutons que j'ai ajouté pour tester! -------------------------------------------------------------------------------------- #}
+
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                    </article>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        <div style="margin-top: 28px;">
+            <a href="{{ path('app_company_dashboard') }}" style="color: var(--navy);">
+                Retour à l'espace candidat
+            </a>
+        </div>
+    </section>
+{% endblock %}

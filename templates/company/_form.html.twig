@@ -1,0 +1,17 @@
+{{ form_start(form, {
+    'attr': {
+        'class': 'profile-edit-form'
+    }
+}) }}
+    
+{{ form_widget(form) }}
+    
+{# <form action="{{ path('') }}"> #}
+    <div class="entity-form-actions" style="margin-bottom: 15px;">
+        <button type="submit" class="entity-form-submit">
+            {{ button_label|default('Enregistrer') }}
+        </button>
+    </div>
+{# </form> #}
+
+{{ form_end(form) }}

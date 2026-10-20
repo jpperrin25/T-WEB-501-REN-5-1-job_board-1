@@ -1,0 +1,40 @@
+<div class="burger-menu" data-burger-menu>
+    <button
+        type="button"
+        class="burger-toggle"
+        data-burger-toggle
+        aria-label="Ouvrir le menu"
+        aria-expanded="false"
+        aria-controls="guest-menu-panel"
+    >
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+
+    <nav
+        class="burger-panel"
+        id="guest-menu-panel"
+        data-burger-panel
+        aria-label="Menu principal"
+        hidden
+    >
+        <a href="{{ path('app_job_index') }}">
+            Offres d'emploi
+        </a>
+
+        <a href="{{ path('app_company_index') }}">
+            Entreprises
+        </a>
+
+        <div class="burger-panel-divider"></div>
+
+        <a href="{{ path('secu.login') }}" class="burger-panel-login">
+            Connexion
+        </a>
+
+        <a href="{{ path('secu.register') }}" class="burger-panel-primary">
+            Inscription
+        </a>
+    </nav>
+</div>

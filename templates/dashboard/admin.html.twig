@@ -1,0 +1,65 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mon tableau de bord — JobBoard{% endblock %}
+
+{% block body %}
+    <div class="dashboard-layout">
+        {% include 'components/_dashboard_sidebar.html.twig' %}
+
+        <main class="dashboard-main candidate-dashboard">
+            <header class="dashboard-welcome">
+                <span class="eyebrow">ESPACE ADMINISTRATEUR</span>
+                <h1>Bonjour {{ app.user.firstname|default('') }} 👋</h1>
+                <p>Manager le site d'ici.</p>
+            </header>
+
+            <section class="dashboard-shortcuts" aria-label="Accès rapides">
+                <a class="dashboard-shortcut" href="{{ path('app_user_edit', {id: app.user.id}) }}">
+                    <span class="dashboard-shortcut-icon" aria-hidden="true">♙</span>
+                    <span>
+                        <strong>Modifier mon profil</strong>
+                        <small>Mettre à jour vos informations personnelles</small>
+                    </span>
+                    <span aria-hidden="true">→</span>
+                </a>
+
+                <section class="dashboard-shortcuts" aria-label="Accès rapides">
+                    <a class="dashboard-shortcut" href="{{ path('app_admin_users', {id: app.user.id}) }}">
+                        <span class="dashboard-shortcut-icon" aria-hidden="true">♙</span>
+                        <span>
+                            <strong>Gérer les utilisateurs</strong>
+                            <small>Mangager tous les utilisateurs</small>
+                        </span>
+                        <span aria-hidden="true">→</span>
+                    </a>
+
+                    <a class="dashboard-shortcut" href="{{ path('app_company_index') }}">
+                        <span class="dashboard-shortcut-icon" aria-hidden="true">▦</span>
+                        <span>
+                            <strong>Gérer les entreprises</strong>
+                            <small>Consulter les entreprises référencées</small>
+                        </span>
+                        <span aria-hidden="true">→</span>
+                    </a>
+
+                    <a class="dashboard-shortcut" href="{{ path('app_job_index') }}">
+                        <span class="dashboard-shortcut-icon" aria-hidden="true">▦</span>
+                        <span>
+                            <strong>Gérer les offres</strong>
+                            <small>Créer, supprimer er modifier les offres</small>
+                        </span>
+                        <span aria-hidden="true">→</span>
+                    </a>
+
+                    <a class="dashboard-shortcut" href="{{ path('app_user_applications') }}">
+                        <span class="dashboard-shortcut-icon" aria-hidden="true">▦</span>
+                        <span>
+                            <strong>Gérer les candidatures</strong>
+                        </span>
+                        <span aria-hidden="true">→</span>
+                    </a>
+
+                </section>
+        </main>
+    </div>
+{% endblock %}

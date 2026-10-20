@@ -1,0 +1,50 @@
+<div class="burger-menu" data-burger-menu>
+    <button
+        type="button"
+        class="burger-toggle"
+        data-burger-toggle
+        aria-label="Ouvrir le menu"
+        aria-expanded="false"
+        aria-controls="user-menu-panel"
+    >
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+
+    <nav
+        class="burger-panel"
+        id="user-menu-panel"
+        data-burger-panel
+        aria-label="Menu utilisateur"
+        hidden
+    >
+        <strong class="burger-panel-title">JobBoard</strong>
+
+        {% if is_granted('ROLE_ADMIN') %}
+            <a href="{{ path('app_admin_dashboard') }}">Mon tableau de bord</a>
+            <a href="{{ path('app_job_index') }}">Gérer les annonces</a>
+            <a href="{{ path('app_company_index') }}">Gérer les entreprises</a>
+            <a href="{{ path('app_admin_users') }}">Gérer les utilisateurs</a>
+            <a href="{{ path('app_user_applications') }}">Gérer les candidatures</a>
+
+        {% elseif is_granted('ROLE_COMPANY') %}
+            <a href="{{ path('app_company_dashboard') }}">Mon tableau de bord</a>
+            <a href="{{ path('app_job_owned_by_a_comapny') }}">Mes offres</a>
+            <a href="{{ path('app_user_applications') }}">Mes candidats</a>
+            <a href="{{ path('app_company_index') }}">Entreprises</a>
+            {# <span class="burger-menu-disabled">Mes documents</span>
+            <span class="burger-menu-disabled">Messagerie</span> #}
+
+        {% else %}
+            <a href="{{ path('app_user_dashboard') }}">Mon tableau de bord</a>
+            <a href="{{ path('app_user_edit', {id: app.user.id}) }}">Modifier mon profil</a>
+            <a href="{{ path('app_user_applications') }}">Mes candidatures</a>
+            {# <span class="burger-menu-disabled" aria-disabled="true">Mes documents</span>
+            <span class="burger-menu-disabled" aria-disabled="true">Messagerie</span> #}
+            <a href="{{ path('app_company_index') }}">Entreprises</a>
+        {% endif %}
+
+        <a href="{{ logout_path() }}" class="burger-logout">Déconnexion</a>
+    </nav>
+</div>

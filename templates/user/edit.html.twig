@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier mon profil — JobBoard{% endblock %}
+
+{% block body %}
+
+    <main class="profile-edit-page container">
+        {% if is_granted('ROLE_ADMIN') %}
+            <a class="profile-edit-back" href="{{ path('app_admin_users') }}">
+                <span aria-hidden="true">←</span> Retour aux utilisateurs
+            </a>
+        {% elseif is_granted('ROLE_COMPANY') %}
+            <a class="profile-edit-back" href="{{ path('app_company_index') }}">
+                <span aria-hidden="true">←</span> Retour aux entreprises
+            </a>
+        {% else %}
+            <a class="profile-edit-back" href="{{ path('app_user_dashboard') }}">
+                <span aria-hidden="true">←</span> Retour au tableau de bord
+            </a>
+        {% endif %}
+
+        <header class="profile-edit-heading">
+            <span class="profile-edit-eyebrow">VOTRE ESPACE PERSONNEL</span>
+            <h1>Modifier mon profil</h1>
+            <p>
+                Gardez vos informations à jour pour profiter pleinement de votre espace JobBoard.
+            </p>
+        </header>
+
+        <section class="profile-edit-card">
+            <div class="profile-edit-card-heading">
+                <span class="profile-edit-icon" aria-hidden="true">♙</span>
+                <div>
+                    <h2>Mes informations</h2>
+                    <p>Vérifiez vos informations et enregistrez vos modifications.</p>
+                </div>
+            </div>
+            
+
+            {{ include('user/_form.html.twig', {
+            'button_label': 'Enregistrer les modifications',
+            'form_class': 'profile-edit-form'
+        }) }}
+        </section>
+        
+                {% include "user/_delete_form.html.twig" %}
+        <p class="profile-edit-security">
+            Vos informations sont associées à votre compte personnel.
+        </p>
+    </main>
+{% endblock %}

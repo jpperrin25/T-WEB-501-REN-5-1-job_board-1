@@ -1,0 +1,104 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Offres de {{ company.name }} | JobBoard{% endblock %}
+
+{% block body %}
+<section class="company-jobs-page">
+    <a href="{{ path('app_company_show', {id: company.id}) }}" class="company-back-link">
+        ← Retour à {{ company.name }}
+    </a>
+
+    <header class="company-jobs-header">
+        <p class="company-detail-eyebrow">RECRUTEMENT</p>
+        <h1>Les offres de {{ company.name }}</h1>
+        <p>Découvrez les opportunités proposées par cette entreprise.</p>
+        <span class="public-listing-count">
+            {{ jobs|length }} offre{{ jobs|length > 1 ? 's' : '' }}
+        </span>
+    </header>
+
+    <div class="company-wide-job-list">
+        {% for job in jobs %}
+            <article class="company-wide-job-card">
+                <div class="company-wide-job-main">
+                    <span class="public-job-company">{{ company.name }}</span>
+                    <h2>{{ job.title }}</h2>
+                    <p class="job-card-location">
+                        📍 {{ job.city ?: job.address ?: 'Lieu à préciser' }}
+                    </p>
+                    <p class="company-wide-job-description">
+                        {{ job.description
+                            ? (job.description|length > 260
+                                ? job.description|slice(0, 260) ~ '…'
+                                : job.description)
+                            : 'Aucune description disponible.' }}
+                    </p>
+                </div>
+
+                <div class="company-wide-job-details">
+                    {% if job.type %}
+                        <span class="job-tag">{{ job.type }}</span>
+                    {% endif %}
+                    {% if job.schedule %}
+                        <span class="job-tag">{{ job.schedule }}</span>
+                    {% endif %}
+                    {% if job.salary and job.salary > 0 %}
+                        <strong class="job-card-salary">
+                            {{ job.salary|number_format(0, ',', ' ') }} € <span>/ an</span>
+                        </strong>
+                    {% endif %}
+
+                    <button type="button" class="public-card-button"
+                        data-job-modal
+                        data-title="{{ job.title|e('html_attr') }}"
+                        data-company="{{ company.name|e('html_attr') }}"
+                        data-description="{{ job.description|default('Aucune description disponible.')|e('html_attr') }}"
+                        data-city="{{ (job.city ?: job.address ?: 'Lieu à préciser')|e('html_attr') }}"
+                        data-type="{{ job.type|default('Non précisé')|e('html_attr') }}"
+                        data-schedule="{{ job.schedule|default('Non précisé')|e('html_attr') }}"
+                        data-salary="{{ job.salary and job.salary > 0 ? job.salary|number_format(0, ',', ' ') ~ ' € / an' : 'Non renseigné' }}"
+                        data-job-url="{{ path('app_job_show', {id: job.id}) }}">
+                        En savoir plus
+                    </button>
+                </div>
+            </article>
+        {% else %}
+            <div class="empty-state">
+                <h2>Aucune offre disponible</h2>
+                <p>Cette entreprise ne propose pas d'offre pour le moment.</p>
+            </div>
+        {% endfor %}
+    </div>
+</section>
+
+<dialog id="public-job-modal" class="jobboard-modal" aria-labelledby="public-job-modal-title">
+    <div class="jobboard-modal-header">
+        <div>
+            <span class="company-detail-eyebrow" id="public-job-modal-company"></span>
+            <h2 id="public-job-modal-title">Détail de l'offre</h2>
+        </div>
+        <button type="button" class="jobboard-modal-close"
+                data-public-modal-close aria-label="Fermer">×</button>
+    </div>
+
+    <div class="jobboard-modal-content">
+        <div class="public-modal-facts">
+            <div><span>Lieu</span><strong id="public-job-modal-city"></strong></div>
+            <div><span>Contrat</span><strong id="public-job-modal-type"></strong></div>
+            <div><span>Horaires</span><strong id="public-job-modal-schedule"></strong></div>
+            <div><span>Rémunération</span><strong id="public-job-modal-salary"></strong></div>
+        </div>
+        <h3>Description du poste</h3>
+        <p id="public-job-modal-description" class="public-modal-description"></p>
+    </div>
+
+    <div class="jobboard-modal-footer">
+        <a id="public-job-modal-detail-link" class="update-href" href="#">
+            Voir la fiche complète →
+        </a>
+        <button type="button" class="btn delete-btn" data-public-modal-close>
+            Fermer
+        </button>
+    </div>
+</dialog>
+{% endblock %}

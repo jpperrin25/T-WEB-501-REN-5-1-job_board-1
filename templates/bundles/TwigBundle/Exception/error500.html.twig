@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Erreur serveur (500) | JobBoard{% endblock %}
+
+{% block body %}
+<div class="profile-edit-page" style="max-width: 650px; margin: 48px auto; text-align: center;">
+
+    <div class="profile-edit-card" style="padding: 48px 32px;">
+        
+        {# Icône d'erreur (on réutilise le style d'icône rond existant) #}
+        <div class="profile-edit-icon" style="width: 72px; height: 72px; font-size: 2.2rem; margin: 0 auto 24px; background: #fdf2f2; color: var(--danger);">
+            ⚠️
+        </div>
+
+        {# En-tête de la page #}
+        <div class="profile-edit-heading" style="margin-bottom: 24px;">
+            <span class="profile-edit-eyebrow" style="color: var(--danger);">ERREUR 500</span>
+            <h1 style="margin-bottom: 12px;">Un problème est survenu</h1>
+            <p style="max-width: 480px; margin: 0 auto; color: var(--muted); font-size: 0.98rem; line-height: 1.6;">
+                Une erreur interne du serveur s'est produite. Nos équipes ont été notifiées et travaillent à sa résolution.
+            </p>
+        </div>
+
+        {# Note d'information (on réutilise le style de note du dashboard) #}
+        <div class="dashboard-note" style="margin-bottom: 32px; text-align: left;">
+            <span aria-hidden="true">ⓘ</span>
+            <p>
+                Vous pouvez essayer de rafraîchir la page dans quelques instants ou revenir à l'accueil.
+            </p>
+        </div>
+
+        {# Boutons d'action alignés #}
+        <div style="display: flex; justify-content: center; gap: 16px; flex-wrap: wrap;">
+            <a href="{{ path('app_job_index') }}" class="applications-back">
+                🏠 Retour à l'accueil
+            </a>
+            
+            <button onclick="window.location.reload();" class="btn" style="width: auto; padding: 0 20px; background-color: var(--brown); border-color: var(--brown); color: #fff;">
+                🔄 Réessayer
+            </button>
+        </div>
+
+    </div>
+
+</div>
+{% endblock %}

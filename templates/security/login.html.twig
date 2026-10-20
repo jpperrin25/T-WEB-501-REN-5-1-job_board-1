@@ -1,0 +1,153 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Connexion - JobBoard{% endblock %}
+
+{% block body %}
+
+    <section class="auth-section">
+
+        <div class="auth-card">
+
+            <div class="auth-heading">
+
+                <h1>Connexion</h1>
+
+                <p>
+                    Choisissez votre espace puis connectez-vous à JobBoard.
+                </p>
+
+            </div>
+
+            {% if error %}
+                <div class="alert">
+                    {{ error.messageKey|trans(error.messageData, 'security') }}
+                </div>
+            {% endif %}
+
+            <div class="role-selector">
+
+                <p class="role-label">
+                    Je me connecte en tant que :
+                </p>
+
+                <div class="role-buttons">
+
+                    <button
+                        type="button"
+                        class="role-button active"
+                        data-role="candidate"
+                    >
+                        Candidat
+                    </button>
+
+                    <button
+                        type="button"
+                        class="role-button"
+                        data-role="company"
+                    >
+                        Entreprise
+                    </button>
+
+                </div>
+
+            </div>
+
+            <form method="post">
+
+                <div class="form-group">
+
+                    <label for="inputEmail">
+                        E-mail
+                    </label>
+
+                    <input
+                        type="email"
+                        id="inputEmail"
+                        name="email"
+                        class="form-control"
+                        placeholder="votre@email.com"
+                        autocomplete="email"
+                        required
+                        autofocus
+                    >
+
+                </div>
+
+                <div class="form-group">
+
+                    <label for="inputPassword">
+                        Mot de passe
+                    </label>
+
+                    <div class="password-wrapper">
+
+                        <input
+                            type="password"
+                            id="inputPassword"
+                            name="password"
+                            class="form-control"
+                            placeholder="••••••••••"
+                            autocomplete="current-password"
+                            required
+                        >
+
+                        <button
+                            type="button"
+                            class="password-toggle"
+                            aria-label="Afficher le mot de passe"
+                        >
+                            <svg
+                                viewBox="0 0 24 24"
+                                aria-hidden="true"
+                            >
+                                <path
+                                    d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6S2 12 2 12Z"
+                                />
+                                <circle
+                                    cx="12"
+                                    cy="12"
+                                    r="3"
+                                />
+                            </svg>
+                        </button>
+
+                    </div>
+
+                    <div class="forgot-password">
+                        <a href="#">
+                            Mot de passe oublié ?
+                        </a>
+                    </div>
+
+                </div>
+
+                <input
+                    type="hidden"
+                    name="_token"
+                    value="{{ csrf_token('authenticate') }}"
+                >
+
+                <button
+                    class="btn"
+                    type="submit"
+                >
+                    Se connecter
+                </button>
+
+            </form>
+
+            <div class="auth-footer">
+
+                <span>Pas encore de compte ?</span>
+
+                <a href="{{ path('secu.register') }}">
+                    Créer un compte
+                </a>
+
+            </div>
+
+        </div>
+
+    </section>
+
+{% endblock %}

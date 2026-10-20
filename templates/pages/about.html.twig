@@ -1,0 +1,79 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}À propos — JobBoard{% endblock %}
+
+{% block body %}
+<section class="about-page">
+    <div class="container">
+        <div class="about-intro">
+            <p class="eyebrow">NOTRE MISSION</p>
+            <h1>L'emploi qui vous correspond, plus simplement.</h1>
+
+            <p class="about-description">
+                JobBoard rapproche les candidats et les entreprises grâce à une
+                plateforme pensée pour rendre la recherche d'emploi plus claire,
+                accessible et efficace. Que vous recherchiez votre prochain poste
+                ou souhaitiez recruter de nouveaux talents, nous vous aidons à
+                découvrir les opportunités et les profils qui correspondent à vos besoins.
+            </p>
+
+            <p class="about-description">
+                Explorez les offres d'emploi, découvrez les entreprises et trouvez
+                les informations nécessaires pour avancer dans votre projet
+                professionnel. JobBoard facilite la rencontre entre les bonnes
+                personnes et les bonnes opportunités.
+            </p>
+
+            <div class="about-actions">
+                <a class="about-button about-button-primary"
+                   href="{{ path('app_job_index') }}">
+                    Découvrir les offres
+                </a>
+                <a class="about-button about-button-secondary"
+                   href="{{ path('app_company_index') }}">
+                    Découvrir les entreprises
+                </a>
+            </div>
+        </div>
+
+        <section class="about-process" aria-labelledby="about-process-title">
+            <div class="about-section-heading">
+                <p class="eyebrow">SIMPLE ET ACCESSIBLE</p>
+                <h2 id="about-process-title">Comment fonctionne JobBoard ?</h2>
+                <p>Trois étapes pour avancer vers votre prochain projet professionnel.</p>
+            </div>
+
+            <div class="about-steps">
+                <article class="about-step">
+                    <span class="about-step-number" aria-hidden="true">01</span>
+                    <h3>Explorez</h3>
+                    <p>Parcourez les offres d'emploi et découvrez les entreprises présentes sur la plateforme.</p>
+                </article>
+
+                <article class="about-step">
+                    <span class="about-step-number" aria-hidden="true">02</span>
+                    <h3>Trouvez</h3>
+                    <p>Consultez les informations disponibles et repérez les opportunités qui correspondent à vos attentes.</p>
+                </article>
+
+                <article class="about-step">
+                    <span class="about-step-number" aria-hidden="true">03</span>
+                    <h3>Passez à l'action</h3>
+                    <p>Connectez-vous pour accéder aux fonctionnalités réservées aux membres et poursuivre votre démarche.</p>
+                </article>
+            </div>
+        </section>
+
+        <section class="about-cta" aria-labelledby="about-cta-title">
+            <div>
+                <h2 id="about-cta-title">Prêt à découvrir votre prochaine opportunité ?</h2>
+                <p>Explorez les offres et les entreprises dès maintenant.</p>
+            </div>
+            <a class="about-button about-button-primary"
+               href="{{ path('app_job_index') }}">
+                Explorer les offres
+            </a>
+        </section>
+    </div>
+</section>
+{% endblock %}

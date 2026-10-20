@@ -1,0 +1,137 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ company.name }} | JobBoard{% endblock %}
+
+{% block body %}
+    <div class="company-detail-page">
+        <a href="{{ path('app_company_index') }}" class="company-back-link">
+            ← Retour aux entreprises
+        </a>
+
+        <section class="company-detail-hero">
+            <div class="company-detail-logo" aria-hidden="true">
+                {{ company.name|slice(0, 1)|upper }}
+            </div>
+            <div class="company-detail-heading">
+                <span class="company-detail-eyebrow">PRÉSENTATION DE L'ENTREPRISE</span>
+                <h1>{{ company.name }}</h1>
+                <p>Découvrez l'entreprise et explorez son univers professionnel.</p>
+            </div>
+            {% if is_granted('ROLE_ADMIN') %}
+                {% include "company/_delete_form.html.twig" %}
+            {% endif %}
+
+        </section>
+
+        <div class="company-detail-grid">
+            <section class="company-detail-card">
+                <h2>À propos</h2>
+                {% if company.description %}
+                    <p class="company-description-preview">
+                        {{ company.description|length > 220
+                        ? company.description|slice(0, 220) ~ '…'
+                        : company.description }}
+                    </p>
+
+                    {% if company.description|length > 220 %}
+                        <button
+                            type="button"
+                            class="company-detail-button"
+                            data-modal-open="company-description-modal"
+                        >
+                            Lire la description complète
+                        </button>
+                    {% endif %}
+                {% else %}
+                    <p class="company-empty-description">
+                        Cette entreprise n'a pas encore renseigné sa description.
+                    </p>
+                {% endif %}
+            </section>
+
+            <aside class="company-detail-card company-detail-information">
+                <h2>Informations</h2>
+                <div class="company-information-row">
+                    <span class="company-information-label">Entreprise</span>
+                    <strong>{{ company.name }}</strong>
+                </div>
+                <div class="company-information-row">
+                    <span class="company-information-label">Numéro SIRET</span>
+                    <strong>{{ company.siret ?: 'Non renseigné' }}</strong>
+                </div>
+                <br>
+                {% if is_granted('ROLE_ADMIN') or myCompany %}
+                    <div class="company-information-row">
+                        <a class="update-href" href="{{ path('app_company_udpate', {id: company.id}) }}">Modifier l'entreprise</a>
+                    </div>{% endif %}
+            </aside>
+        </div>
+
+        <section class="company-associated-jobs">
+            <div class="company-associated-heading">
+                <div>
+                    <p class="company-detail-eyebrow">OPPORTUNITÉS</p>
+                    <h2>Les offres de {{ company.name }}</h2>
+                </div>
+                <a
+                    class="company-jobs-link"
+                    href="{{ path('app_company_jobs', {id: company.id}) }}"
+                >
+                    Toutes les offres →
+                </a>
+            </div>
+
+            <div class="company-mini-job-grid">
+                {% for job in company.jobs|slice(0, 4) %}
+                    <a
+                        class="company-mini-job-card"
+                        href="{{ path('app_job_show', {id: job.id}) }}"
+                    >
+                        <span class="company-mini-job-company">{{ company.name }}</span>
+                        <h3>{{ job.title }}</h3>
+                        <p>{{ job.city ?: job.address ?: 'Lieu à préciser' }}</p>
+
+                        {% if job.type %}
+                            <span class="job-tag">{{ job.type }}</span>
+                        {% endif %}
+
+                        <span class="company-mini-job-link">Découvrir l'offre →</span>
+                    </a>
+                {% else %}
+                    <p class="empty-state">Aucune offre associée pour le moment.</p>
+                {% endfor %}
+            </div>
+        </section>
+
+        {% if company.description and company.description|length > 220 %}
+            <dialog
+                id="company-description-modal"
+                class="jobboard-modal"
+                aria-labelledby="company-description-title"
+            >
+                <div class="jobboard-modal-header">
+                    <div>
+                        <span class="company-detail-eyebrow">À PROPOS</span>
+                        <h2 id="company-description-title">{{ company.name }}</h2>
+                    </div>
+                    <button
+                        type="button"
+                        class="jobboard-modal-close"
+                        data-modal-close
+                        aria-label="Fermer"
+                    >×</button>
+                </div>
+
+                <div class="jobboard-modal-content">
+                    {{ company.description|nl2br }}
+                </div>
+
+                <div class="jobboard-modal-footer">
+                    <button type="button" class="company-detail-button" data-modal-close>
+                        Fermer
+                    </button>
+                </div>
+            </dialog>
+        {% endif %}
+    </div>
+{% endblock %}

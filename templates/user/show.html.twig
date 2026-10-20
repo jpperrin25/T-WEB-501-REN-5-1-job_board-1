@@ -1,0 +1,92 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Profil du candidat | JobBoard{% endblock %}
+
+{% block body %}
+    <div class="profile-edit-page">
+
+        {# En-tête #}
+        <a href="{{ path('app_user_dashboard') }}" class="profile-edit-back">
+            ← Retour à la liste
+        </a>
+
+        <div class="profile-edit-heading">
+            <span class="profile-edit-eyebrow">ESPACE RECRUTEUR</span>
+            <h1>Profil du candidat</h1>
+            <p>Retrouvez les coordonnées et les informations du candidat.</p>
+        </div>
+
+        {# Carte du candidat #}
+        <div class="profile-edit-card">
+
+            {# Identité #}
+            <div class="profile-edit-card-heading">
+                <div class="profile-edit-icon">
+                    👤
+                </div>
+                <div>
+                    <h2>{{ user.firstname }} {{ user.lastname }}</h2>
+                    <p>{{ user.email }}</p>
+                </div>
+            </div>
+
+            {# Informations sous forme de cartes d'attributs (Grille existante dans votre CSS) #}
+            <div class="public-modal-facts" style="margin-bottom: 28px;">
+                <div>
+                    <span>Adresse e-mail</span>
+                    <strong>{{ user.email ?: 'Non renseignée' }}</strong>
+                </div>
+
+                <div>
+                    <span>Téléphone</span>
+                    <strong>{{ user.phone ?: 'Non renseigné' }}</strong>
+                </div>
+
+                <div>
+                    <span>Ville</span>
+                    <strong>{{ user.city ?: 'Non renseignée' }}</strong>
+                </div>
+
+                <div>
+                    <span>Code postal</span>
+                    <strong>{{ user.postalCode ?: 'Non renseigné' }}</strong>
+                </div>
+
+                <div style="grid-column: 1 / -1;">
+                    <span>Diplôme</span>
+                    <strong>{{ user.graduate ?: 'Non renseigné' }}</strong>
+                </div>
+            </div>
+
+            {# Actions #}
+            <div class="entity-form-actions" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
+
+                {# {% if is_granted('ROLE_ADMIN') %}
+                    <a href="{{ path('app_user_edit', {'id': user.id}) }}" class="applications-back">
+                        Modifier le profil →
+                    </a>{% endif %} #}
+            
+
+                <form
+                    action="{{ path('app_company_delete_application', {id: application.id}) }}"
+                    method="post"
+                    onsubmit="return confirm('Voulez-vous vraiment supprimer cette candidature ?');"
+                    style="margin: 0;"
+                >
+                    <input
+                        type="hidden"
+                        name="_token"
+                        value="{{ csrf_token('delete' ~ application.id) }}"
+                    >
+
+                    <button type="submit" class="delete-btn" style="padding: 11px 18px; max-width: none; color: #fff;">
+                        Supprimer la candidature
+                    </button>
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+{% endblock %}

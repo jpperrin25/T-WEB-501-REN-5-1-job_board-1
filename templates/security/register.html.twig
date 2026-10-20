@@ -1,0 +1,263 @@
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Inscription - JobBoard{% endblock %}
+
+{% block body %}
+
+    <section class="auth-section">
+
+        <div class="auth-card register-card">
+
+            <div class="auth-heading">
+                <h1>Créer votre compte</h1>
+                <p>Rejoignez JobBoard en quelques étapes.</p>
+            </div>
+
+            {# {% if error %}
+            <div class="alert">
+                {% if error.messageKey is defined %}
+                    {{ error.messageKey|trans(error.messageData, 'security') }}
+                {% else %}
+                    {{ error }}
+                {% endif %}
+            </div>
+        {% endif %} #}
+
+            <form method="post" data-auth-form="register">
+
+                {# INFORMATIONS COMMUNES #}
+                <div class="form-grid">
+
+                    <div class="form-group">
+                        <label for="inputLastname">Nom</label>
+                        <input
+                            type="text"
+                            id="inputLastname"
+                            name="lastname"
+                            class="form-control"
+                            placeholder="Dupont"
+                            autocomplete="family-name"
+                            required
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="inputFirstname">Prénom</label>
+                        <input
+                            type="text"
+                            id="inputFirstname"
+                            name="firstname"
+                            class="form-control"
+                            placeholder="Jean"
+                            autocomplete="given-name"
+                            required
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="inputPhone">Numéro de téléphone</label>
+                        <input
+                            type="tel"
+                            id="inputPhone"
+                            name="phone"
+                            class="form-control"
+                            placeholder="06 00 00 00 00"
+                            autocomplete="tel"
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="inputEmail">E-mail</label>
+                        <input
+                            type="email"
+                            id="inputEmail"
+                            name="email"
+                            class="form-control"
+                            placeholder="jean@email.com"
+                            autocomplete="email"
+                            required
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="inputAddress">Adresse</label>
+                        <input
+                            type="text"
+                            id="inputAddress"
+                            name="address"
+                            class="form-control"
+                            placeholder="12 rue de Rennes"
+                            autocomplete="street-address"
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="inputPostalCode">Code postal</label>
+                        <input
+                            type="text"
+                            id="inputPostalCode"
+                            name="postal_code"
+                            class="form-control"
+                            placeholder="35000"
+                            inputmode="numeric"
+                            pattern="[0-9]{5}"
+                            maxlength="5"
+                            autocomplete="postal-code"
+                            required
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="inputCity">Ville</label>
+                        <input
+                            type="text"
+                            id="inputCity"
+                            name="city"
+                            class="form-control"
+                            placeholder="Rennes"
+                            autocomplete="address-level2"
+                            required
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="inputPassword">Mot de passe</label>
+
+                        <div class="password-wrapper">
+                            <input
+                                type="password"
+                                id="inputPassword"
+                                name="password"
+                                class="form-control"
+                                placeholder="••••••••••"
+                                autocomplete="new-password"
+                                required
+                            >
+
+                            <button
+                                type="button"
+                                class="password-toggle"
+                                aria-label="Afficher le mot de passe"
+                            >
+                                <svg viewBox="0 0 24 24" aria-hidden="true">
+                                    <path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6S2 12 2 12Z"/>
+                                    <circle cx="12" cy="12" r="3"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+
+                {# TYPE DE COMPTE #}
+                <div class="account-type">
+
+                    <p class="account-type-label">Vous êtes :</p>
+
+                    <div class="account-type-options">
+
+                        <button
+                            type="button"
+                            class="account-type-option active"
+                            data-role="candidate"
+                            aria-pressed="true"
+                        >
+                            <span class="radio-dot"></span>
+                            Candidat
+                        </button>
+
+                        <button
+                            type="button"
+                            class="account-type-option"
+                            data-role="company"
+                            aria-pressed="false"
+                        >
+                            <span class="radio-dot"></span>
+                            Entreprise
+                        </button>
+
+                    </div>
+                </div>
+
+                {# INFORMATIONS ENTREPRISE : MASQUÉES PAR DÉFAUT #}
+                <div class="form-grid" id="companyFields" hidden>
+
+                <div class="form-group">
+                    <label for="inputCompanyName">Nom de l'entreprise</label>
+                    <input
+                        type="text"
+                        id="inputCompanyName"
+                        name="name"
+                        class="form-control"
+                        placeholder="Ex. : NovaTech Solutions"
+                        autocomplete="organization"
+                        disabled
+                    >
+                </div>
+
+                    <div class="form-group">
+                        <label for="inputSiret">Numéro SIRET</label>
+                        <input
+                            type="text"
+                            id="inputSiret"
+                            name="siret"
+                            class="form-control"
+                            placeholder="14 chiffres"
+                            inputmode="numeric"
+                            pattern="[0-9]{14}"
+                            maxlength="14"
+                            disabled
+                        >
+                    </div>
+
+                <div class="form-group company-description-group">
+                    <label for="inputCompanyDescription">
+                        Description de l'entreprise (facultatif)
+                    </label>
+                    <textarea
+                        id="inputCompanyDescription"
+                        name="description"
+                        class="form-control company-description"
+                        placeholder="Présentez votre entreprise et son activité..."
+                        rows="4"
+                        disabled
+                    ></textarea>
+                </div>
+
+            </div>
+
+                {# CONDITIONS D'UTILISATION #}
+                <label class="terms-checkbox">
+                    <input
+                        type="checkbox"
+                        name="_agree_terms"
+                        required
+                    >
+                    <span>
+                        J'accepte les CGU et la politique de confidentialité.
+                    </span>
+                </label>
+
+                <p class="terms-info">
+                    En créant votre compte, vous acceptez nos conditions d'utilisation.
+                </p>
+
+                {# JETON CSRF ATTENDU PAR LE CONTRÔLEUR D'INSCRIPTION #}
+                <input
+                    type="hidden"
+                    name="_token"
+                    value="{{ csrf_token('register') }}"
+                >
+
+                <button class="btn register-button" type="submit">
+                    Créer mon compte
+                </button>
+
+            </form>
+
+        </div>
+
+    </section>
+
+{% endblock %}
